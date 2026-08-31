@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10b981">
+    <title>OS-PREMIUM - Sistema Profissional para Assistências Técnicas</title>
+    <meta name="description" content="Sistema completo para gestão de assistências técnicas: OS, clientes, estoque, financeiro, MDM, Panic Full, UART e muito mais.">
+    <meta name="keywords" content="sistema OS, ordem de serviço, assistência técnica, MDM, Panic Full, UART, gestão">
+    <meta name="author" content="Washington Rodrigo Viana Severo">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="OS-PREMIUM - Sistema Profissional para Assistências Técnicas">
+    <meta property="og:description" content="Gestão completa + ferramentas técnicas profissionais em um único sistema">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --primary-glow: rgba(16, 185, 129, 0.4);
+            --accent: #00ff88;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --bg-card: rgba(16, 185, 129, 0.06);
+            --bg-card-hover: rgba(16, 185, 129, 0.12);
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+            --text-dark: #71717a;
+            --border: rgba(16, 185, 129, 0.15);
+            --border-strong: rgba(16, 185, 129, 0.3);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            padding: 12px 0;
+            background: rgba(5, 5, 5, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            transition: transform 0.3s;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--primary-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-ghost {
+            padding: 10px 20px;
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .btn-ghost:hover {
+            color: var(--primary-light);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-strong);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 24px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: 68px;
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #34d399, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            max-width: 540px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-large.primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .btn-large.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px var(--primary-glow);
+        }
+
+        .btn-large.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border-strong);
+        }
+
+        .btn-large.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .hero-feature::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Hero Mockup */
+        .hero-mockup {
+            position: relative;
+            height: 520px;
+            animation: fadeInRight 1s ease;
+        }
+
+        .mockup-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(135deg, #0a1a14, #0d2818);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.6),
+                0 0 0 1px var(--border-strong),
+                var(--shadow-glow);
+            border: 1px solid var(--border-strong);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot.red { background: #ef4444; }
+        .mockup-dot.yellow { background: #f59e0b; }
+        .mockup-dot.green { background: #10b981; }
+
+        .mockup-title {
+            margin-left: auto;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .mockup-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .mockup-stat {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-strong);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .mockup-stat .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-stat .value {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .mockup-stat .value.green { color: var(--primary); }
+        .mockup-stat .value.purple { color: var(--primary-light); }
+
+        .mockup-list {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .mockup-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mockup-item:last-child {
+            border-bottom: none;
+        }
+
+        .mockup-item-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .mockup-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mockup-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .mockup-item-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .mockup-item-status {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(10, 26, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating-card.card-1 {
+            top: 10%;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 15%;
+            left: -30px;
+            animation-delay: 2s;
+        }
+
+        .floating-card .fc-title {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .floating-card .fc-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .floating-card .fc-value.green { color: var(--primary); }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-strong);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-title {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ============ FEATURES ============ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--primary);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border: 1px solid var(--border-strong);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .feature-tag {
+            margin-top: 16px;
+            padding: 8px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--primary-light);
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* ============ DIFERENCIAIS TÉCNICOS ============ */
+        .diferenciais-section {
+            background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.03) 50%, transparent 100%);
+        }
+
+        .diferencial-card {
+            border: 1px solid var(--border-strong);
+            position: relative;
+        }
+
+        .diferencial-card.featured {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            border: 2px solid var(--primary);
+        }
+
+        .diferencial-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            white-space: nowrap;
+        }
+
+        /* Banner Destacado */
+        .banner-destaque {
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 60px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-destaque::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .banner-destaque > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-destaque h3 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .banner-destaque h3 .highlight {
+            color: var(--primary-light);
+        }
+
+        .banner-destaque p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .banner-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .banner-stat {
+            background: rgba(16, 185, 129, 0.15);
+            padding: 20px 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-strong);
+            min-width: 140px;
+        }
+
+        .banner-stat .number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-light);
+            line-height: 1;
+        }
+
+        .banner-stat .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ============ RECURSOS LISTA ============ */
+        .recursos-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .recurso-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s;
+        }
+
+        .recurso-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+            background: var(--bg-card-hover);
+        }
+
+        .recurso-icon {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .recurso-text {
+            font-size: 14px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* ============ PRICING ============ */
+        .pricing-section {
+            background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.04) 50%, transparent 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 32px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .pricing-card .price-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .price {
+            font-size: 52px;
+            font-weight: 900;
+            color: white;
+            margin: 20px 0;
+            line-height: 1;
+        }
+
+        .pricing-card .price .currency {
+            font-size: 24px;
+            vertical-align: top;
+            color: var(--primary-light);
+            margin-right: 2px;
+        }
+
+        .pricing-card .price .period {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 32px 0;
+        }
+
+        .pricing-card ul li {
+            padding: 12px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-pricing.primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-pricing.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .btn-pricing.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border-strong);
+        }
+
+        .btn-pricing.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ============ CTA ============ */
+        .cta-section {
+            padding: 80px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            border: 1px solid var(--border-strong);
+            border-radius: 24px;
+            padding: 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .cta-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .cta-box p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 16px;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-bottom .developer {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+
+        /* ============ WHATSAPP FLOAT ============ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: pulse-whatsapp 2s infinite;
+        }
+
+        @keyframes pulse-whatsapp {
+            0%, 100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 8px 40px rgba(37, 211, 102, 0.8); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 968px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                padding: 140px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-8px);
+            }
+
+            .banner-destaque {
+                padding: 40px 24px;
+            }
+
+            .banner-destaque h3 {
+                font-size: 28px;
+            }
+
+            .cta-box {
+                padding: 40px 24px;
+            }
+
+            .cta-box h2 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+                letter-spacing: -1px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .banner-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .banner-stat {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* ============ MOBILE MENU ============ */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            font-size: 16px;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">🛠️</div>
+                    <div class="logo-text">OS<span>-PREMIUM</span></div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#funcionalidades">Funcionalidades</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#precos">Preços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-ghost">Entrar</button>
+                    <a href="#precos" class="btn-primary">Começar Grátis</a>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#funcionalidades" onclick="toggleMenu()">Funcionalidades</a>
+            <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
+            <a href="#recursos" onclick="toggleMenu()">Recursos</a>
+            <a href="#precos" onclick="toggleMenu()">Preços</a>
+            <a href="#contato" onclick="toggleMenu()">Contato</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge">SISTEMA PROFISSIONAL PARA ASSISTÊNCIAS TÉCNICAS</div>
+                    <h1>
+                        MUDE A FORMA COMO SUA<br>
+                        <span class="highlight">ASSISTÊNCIA TÉCNICA</span><br>
+                        TRABALHA
+                    </h1>
+                    <p>
+                        Sistema completo para administrar sua loja, organizar suas Ordens de Serviço e contar com ferramentas técnicas profissionais para sua bancada.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#precos" class="btn-large primary">
+                            TESTAR GRÁTIS →
+                        </a>
+                        <a href="#funcionalidades" class="btn-large secondary">
+                            CONHECER O SISTEMA
+                        </a>
+                    </div>
+                    <div class="hero-features">
+                        <div class="hero-feature">7 dias grátis em qualquer plano</div>
+                        <div class="hero-feature">Ative em minutos</div>
+                        <div class="hero-feature">100% Offline</div>
+                    </div>
+                </div>
+
+                <div class="hero-mockup">
+                    <div class="mockup-main">
+                        <div class="mockup-header">
+                            <div class="mockup-dot red"></div>
+                            <div class="mockup-dot yellow"></div>
+                            <div class="mockup-dot green"></div>
+                            <div class="mockup-title">Dashboard - OS-PREMIUM</div>
+                        </div>
+                        <div class="mockup-stats">
+                            <div class="mockup-stat">
+                                <div class="label">ORDENS DE SERVIÇO</div>
+                                <div class="value purple">128</div>
+                            </div>
+                            <div class="mockup-stat">
+                                <div class="label">FATURAMENTO</div>
+                                <div class="value green">R$ 84.560</div>
+                            </div>
+                        </div>
+                        <div class="mockup-list">
+                            <div class="mockup-item">
+                                <div class="mockup-item-icon">📱</div>
+                                <div class="mockup-item-content">
+                                    <div class="mockup-item-title">iPhone 13 Pro</div>
+                                    <div class="mockup-item-subtitle">Cliente: Marina Costa</div>
+                                </div>
+                                <div class="mockup-item-status">Em reparo</div>
+                            </div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-icon">💻</div>
+                                <div class="mockup-item-content">
+                                    <div class="mockup-item-title">Notebook Dell</div>
+                                    <div class="mockup-item-subtitle">Cliente: João Silva</div>
+                                </div>
+                                <div class="mockup-item-status">Pronto</div>
+                            </div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-icon">🖥️</div>
+                                <div class="mockup-item-content">
+                                    <div class="mockup-item-title">Monitor Samsung</div>
+                                    <div class="mockup-item-subtitle">Cliente: Pedro Santos</div>
+                                </div>
+                                <div class="mockup-item-status">Entregue</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-card card-1">
+                        <div class="fc-title">Faturamento Hoje</div>
+                        <div class="fc-value green">+R$ 2.450</div>
+                    </div>
+
+                    <div class="floating-card card-2">
+                        <div class="fc-title">OS Concluídas</div>
+                        <div class="fc-value">+15%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCIONALIDADES -->
+    <section id="funcionalidades">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">FUNCIONALIDADES</div>
+                <h2 class="section-title">Tudo que você precisa em <span class="highlight">um só lugar</span></h2>
+                <p class="section-subtitle">Sistema completo para gestão da sua assistência técnica, do atendimento ao faturamento</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"></div>
+                    <h3>Dashboard Completo</h3>
+                    <p>Visão geral do seu negócio com estatísticas de clientes, OS abertas, OS prontas e faturamento em tempo real.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">👥</div>
+                    <h3>Gestão de Clientes</h3>
+                    <p>Cadastro completo com nome, telefone, email e endereço. Envio automático de email de boas-vindas.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Ordens de Serviço</h3>
+                    <p>Crie OS com equipamento, marca, modelo, defeito, status, valor de entrada e orçamento total.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📋</div>
+                    <h3>Lista de Ordens</h3>
+                    <p>Visualize, edite e imprima todas as OS com filtros por status e cliente.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon"></div>
+                    <h3>Controle de Estoque</h3>
+                    <p>Gerencie peças e produtos com controle de entrada, saída e saldo em tempo real.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💰</div>
+                    <h3>Financeiro Completo</h3>
+                    <p>Controle de receitas, despesas, faturamento e relatórios detalhados do seu negócio.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📈</div>
+                    <h3>Relatórios</h3>
+                    <p>Relatórios de faturamento, OS por período, desempenho e análises completas.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📄</div>
+                    <h3>Relatório MEI com PDF</h3>
+                    <p>Relatório anual no padrão DASN-SIMEI para declaração ao Portal do Empreendedor. Exporte em PDF.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Dados da Empresa Bloqueados</h3>
+                    <p>Dados cadastrados na ativação ficam bloqueados para garantir integridade das informações.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Alterar Login e Senha</h3>
+                    <p>Cliente pode alterar usuário e senha do sistema com segurança e facilidade.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💾</div>
+                    <h3>Backup e Restauração</h3>
+                    <p>Faça backup completo dos dados e restaure quando necessário. Segurança total.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon"></div>
+                    <h3>Sistema de Licença</h3>
+                    <p>Ativação por chave com validade configurável (7 dias, 30 dias, 1 ano ou vitalício).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS TÉCNICOS -->
+    <section id="diferenciais" class="diferenciais-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">DIFERENCIAIS EXCLUSIVOS</div>
+                <h2 class="section-title">Ferramentas técnicas <span class="highlight">profissionais</span></h2>
+                <p class="section-subtitle">Além da gestão completa, oferecemos ferramentas técnicas avançadas para sua bancada</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card diferencial-card reveal">
+                    <div class="feature-icon">📱</div>
+                    <h3>Sistema MDM</h3>
+                    <p>Gerenciamento completo de dispositivos móveis. Controle, monitoramento e configuração remota de aparelhos conectados.</p>
+                    <div class="feature-tag">✓ Compatível com iOS e Android</div>
+                </div>
+
+                <div class="feature-card diferencial-card reveal">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Remoção de Vírus</h3>
+                    <p>Sistema avançado de detecção e remoção de malware. Proteja dispositivos de clientes contra ameaças e softwares maliciosos.</p>
+                    <div class="feature-tag">✓ Base de vírus atualizada</div>
+                </div>
+
+                <div class="feature-card diferencial-card reveal">
+                    <div class="feature-icon"></div>
+                    <h3>Interface UART</h3>
+                    <p>Comunicação serial avançada para diagnóstico profundo. Acesse logs do sistema, recupere dados e realize reparos em nível de hardware.</p>
+                    <div class="feature-tag">✓ Diagnóstico em tempo real</div>
+                </div>
+
+                <div class="feature-card diferencial-card reveal">
+                    <div class="feature-icon">📊</div>
+                    <h3>Monitor de Sistema</h3>
+                    <p>Monitoramento completo de desempenho, temperatura, bateria e saúde do dispositivo. Identifique problemas antes que aconteçam.</p>
+                    <div class="feature-tag">✓ Alertas em tempo real</div>
+                </div>
+
+                <div class="feature-card diferencial-card featured reveal">
+                    <div class="diferencial-badge">🍎 EXCLUSIVO PARA IPHONE</div>
+                    <div class="feature-icon">⚠️</div>
+                    <h3>Panic Full para iPhones</h3>
+                    <p>Ferramenta especializada para análise de panic logs em iPhones. Identifique falhas de hardware, problemas de placa e erros críticos do sistema iOS.</p>
+                    <div class="feature-tag">✓ Compatível com todos os modelos iPhone</div>
+                </div>
+
+                <div class="feature-card diferencial-card reveal">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Interpolação de Dados</h3>
+                    <p>Recuperação e reconstrução de dados corrompidos. Interpole informações de dispositivos danificados para recuperar dados importantes.</p>
+                    <div class="feature-tag">✓ Alta taxa de sucesso</div>
+                </div>
+            </div>
+
+            <!-- Banner Destacado -->
+            <div class="banner-destaque reveal">
+                <h3>🎯 O único sistema que une <span class="highlight">gestão + ferramentas técnicas</span></h3>
+                <p>Enquanto outros sistemas oferecem apenas gestão de OS, o OS-PREMIUM inclui ferramentas profissionais de diagnóstico, recuperação e reparo para sua bancada técnica.</p>
+                <div class="banner-stats">
+                    <div class="banner-stat">
+                        <div class="number">6+</div>
+                        <div class="label">Ferramentas Técnicas</div>
+                    </div>
+                    <div class="banner-stat">
+                        <div class="number">100%</div>
+                        <div class="label">Funciona Offline</div>
+                    </div>
+                    <div class="banner-stat">
+                        <div class="number"></div>
+                        <div class="label">Dispositivos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECURSOS DETALHADOS -->
+    <section id="recursos">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">RECURSOS DETALHADOS</div>
+                <h2 class="section-title">Lista completa de <span class="highlight">funcionalidades</span></h2>
+                <p class="section-subtitle">Mais de 20 recursos profissionais para sua assistência técnica</p>
+            </div>
+
+            <div class="recursos-lista">
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Dashboard com estatísticas em tempo real</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Cadastro de clientes com endereço</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Envio de email de boas-vindas</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Criação de Ordens de Serviço</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Valor de entrada na OS</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Status (Em Reparo, Aguardando Peça, Pronto, Entregue)</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Lista completa de OS com filtros</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Visualização detalhada de OS</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Impressão profissional de OS</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Controle de estoque completo</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Gestão financeira</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Relatórios de faturamento</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Relatório MEI padrão DASN-SIMEI</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Exportação de relatório MEI em PDF</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Dados da empresa bloqueados</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Alteração de login e senha</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Backup completo dos dados</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Restauração de backup</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Sistema de licença por chave</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Ativação offline (sem internet)</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Interface moderna e intuitiva</span></div>
+                <div class="recurso-item reveal"><span class="recurso-icon">✓</span><span class="recurso-text">Funciona 100% offline</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇOS -->
+    <section id="precos" class="pricing-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">PLANOS</div>
+                <h2 class="section-title">Plano único com <span class="highlight">tudo incluso</span></h2>
+                <p class="section-subtitle">Acesse todas as funcionalidades por um preço justo</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Trial</h3>
+                    <p class="price-desc">Teste grátis por 7 dias</p>
+                    <div class="price">
+                        <span class="currency">R$</span>0<span class="period">/7 dias</span>
+                    </div>
+                    <ul>
+                        <li>Todas as funcionalidades</li>
+                        <li>Suporte por email</li>
+                        <li>1 usuário</li>
+                        <li>Backup manual</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing secondary">Testar Grátis</a>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-badge">MAIS POPULAR</div>
+                    <h3>Mensal</h3>
+                    <p class="price-desc">Acesso completo mensal</p>
+                    <div class="price">
+                        <span class="currency">R$</span>20<span class="period">/mês</span>
+                    </div>
+                    <ul>
+                        <li>Todas as funcionalidades</li>
+                        <li>Suporte prioritário</li>
+                        <li>Usuários ilimitados</li>
+                        <li>Backup automático</li>
+                        <li>Atualizações gratuitas</li>
+                        <li>Relatório MEI em PDF</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing primary">Assinar Agora</a>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <h3>Anual</h3>
+                    <p class="price-desc">Economize R$ 10 no ano</p>
+                    <div class="price">
+                        <span class="currency">R$</span>230<span class="period">/ano</span>
+                    </div>
+                    <ul>
+                        <li>Todas as funcionalidades</li>
+                        <li>Suporte prioritário</li>
+                        <li>Usuários ilimitados</li>
+                        <li>Backup automático</li>
+                        <li>Atualizações gratuitas</li>
+                        <li>Relatório MEI em PDF</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing secondary">Assinar Anual</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Pronto para transformar sua assistência?</h2>
+                <p>Comece grátis por 7 dias e descubra o poder do OS-PREMIUM</p>
+                <a href="https://github.com/seu-usuario/os-premium" class="btn-large primary" target="_blank">
+                    🔗 VER NO GITHUB
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">🛠️</div>
+                        <div class="logo-text">OS<span>-PREMIUM</span></div>
+                    </a>
+                    <p>Sistema profissional de gestão para assistências técnicas e prestadores de serviço. Desenvolvido com foco em simplicidade e eficiência.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Produto</h4>
+                    <ul>
+                        <li><a href="#funcionalidades">Funcionalidades</a></li>
+                        <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#recursos">Recursos</a></li>
+                        <li><a href="#precos">Preços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 OS-PREMIUM. Desenvolvido por <span class="developer">Washington Rodrigo Viana Severo</span></p>
+                <div class="social-links">
+                    <a href="#" title="GitHub">📦</a>
+                    <a href="#" title="WhatsApp">💬</a>
+                    <a href="#" title="Email">📧</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/5521999999999" class="whatsapp-float" target="_blank" title="Fale conosco">
+        💬
+    </a>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add staggered animation delay to reveal elements
+        document.querySelectorAll('.features-grid .reveal, .recursos-lista .reveal, .pricing-grid .reveal').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.05}s`;
+        });
+    </script>
+</body>
+</html>
