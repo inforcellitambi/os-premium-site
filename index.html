@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#10b981">
+    <meta name="theme-color" content="#00e676">
     <title>OS-PREMIUM - Sistema Profissional para Assistências Técnicas</title>
     <meta name="description" content="Sistema completo para gestão de assistências técnicas: OS, clientes, estoque, financeiro, MDM, Panic Full, UART e muito mais.">
     <meta name="keywords" content="sistema OS, ordem de serviço, assistência técnica, MDM, Panic Full, UART, gestão">
@@ -18,18 +18,18 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --primary-light: #34d399;
-            --primary-glow: rgba(16, 185, 129, 0.4);
+            --primary: #00e676;
+            --primary-dark: #00c853;
+            --primary-light: #69f0ae;
+            --primary-glow: rgba(0, 230, 118, 0.4);
             --bg-dark: #0a0a0a;
             --bg-darker: #050505;
-            --bg-card: rgba(16, 185, 129, 0.06);
-            --bg-card-hover: rgba(16, 185, 129, 0.12);
+            --bg-card: rgba(0, 230, 118, 0.06);
+            --bg-card-hover: rgba(0, 230, 118, 0.12);
             --text: #ffffff;
             --text-muted: #a1a1aa;
-            --border: rgba(16, 185, 129, 0.15);
-            --border-strong: rgba(16, 185, 129, 0.3);
+            --border: rgba(0, 230, 118, 0.15);
+            --border-strong: rgba(0, 230, 118, 0.3);
         }
         html { scroll-behavior: smooth; }
         body {
@@ -45,8 +45,8 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 20% 20%, rgba(0, 230, 118, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(105, 240, 174, 0.08) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -67,7 +67,7 @@
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .logo-icon {
             width: 42px; height: 42px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
             font-size: 22px;
@@ -91,10 +91,10 @@
             border: none; font-size: 14px; font-weight: 500;
             cursor: pointer; transition: all 0.3s; border-radius: 8px;
         }
-        .btn-ghost:hover { color: var(--primary-light); background: rgba(16, 185, 129, 0.1); }
+        .btn-ghost:hover { color: var(--primary-light); background: rgba(0, 230, 118, 0.1); }
         .btn-primary {
             padding: 10px 24px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             color: white; border: none; border-radius: 8px;
             font-size: 14px; font-weight: 600; cursor: pointer;
             transition: all 0.3s;
@@ -105,12 +105,12 @@
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
         
         /* HERO */
-        .hero { padding: 180px 0 120px; position: relative; overflow: hidden; }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+        .hero { padding: 160px 0 100px; position: relative; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; }
         .badge {
             display: inline-flex; align-items: center; gap: 8px;
             padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(0, 230, 118, 0.1);
             border: 1px solid var(--border-strong);
             border-radius: 50px;
             font-size: 13px; font-weight: 600;
@@ -127,12 +127,12 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
         .hero h1 {
-            font-size: 68px; font-weight: 900;
+            font-size: 62px; font-weight: 900;
             line-height: 1.05; margin-bottom: 24px;
             letter-spacing: -2px;
         }
         .hero h1 .highlight {
-            background: linear-gradient(135deg, #34d399, #10b981, #059669);
+            background: linear-gradient(135deg, #69f0ae, #00e676, #00c853);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -145,10 +145,10 @@
         }
         .hero p {
             font-size: 18px; color: var(--text-muted);
-            margin-bottom: 40px; line-height: 1.7;
+            margin-bottom: 36px; line-height: 1.7;
             max-width: 540px;
         }
-        .hero-buttons { display: flex; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; }
+        .hero-buttons { display: flex; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
         .btn-large {
             padding: 16px 32px; border-radius: 12px;
             font-size: 15px; font-weight: 600;
@@ -157,7 +157,7 @@
             transition: all 0.3s; cursor: pointer; border: none;
         }
         .btn-large.primary {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             color: white;
             box-shadow: 0 8px 30px var(--primary-glow);
         }
@@ -171,77 +171,37 @@
             border-color: var(--primary-light);
             transform: translateY(-3px);
         }
-        .hero-features { display: flex; flex-wrap: wrap; gap: 24px; }
+        .hero-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
         .hero-feature {
             display: flex; align-items: center; gap: 8px;
             font-size: 14px; color: var(--text-muted);
         }
         .hero-feature::before { content: '✓'; color: var(--primary); font-weight: bold; font-size: 16px; }
         
-        /* HERO MOCKUP */
-        .hero-mockup { position: relative; height: 520px; }
-        .mockup-main {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%; max-width: 480px;
-            background: linear-gradient(135deg, #0a1a14, #0d2818);
-            border-radius: 20px; padding: 24px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-strong), 0 0 40px rgba(16, 185, 129, 0.3);
-            border: 1px solid var(--border-strong);
-        }
-        .mockup-header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-        .mockup-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .mockup-dot.red { background: #ef4444; }
-        .mockup-dot.yellow { background: #f59e0b; }
-        .mockup-dot.green { background: #10b981; }
-        .mockup-title { margin-left: auto; font-size: 12px; color: var(--text-muted); }
-        .mockup-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .mockup-stat {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--border-strong);
-            border-radius: 12px; padding: 16px;
-        }
-        .mockup-stat .label { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; letter-spacing: 0.5px; }
-        .mockup-stat .value { font-size: 24px; font-weight: 800; color: white; }
-        .mockup-stat .value.green { color: var(--primary); }
-        .mockup-stat .value.purple { color: var(--primary-light); }
-        .mockup-list { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 16px; }
-        .mockup-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .mockup-item:last-child { border-bottom: none; }
-        .mockup-item-icon {
-            width: 32px; height: 32px;
-            background: rgba(16, 185, 129, 0.15);
-            border-radius: 8px;
+        /* ✅ IMAGEM DE DESTAQUE NO TOPO */
+        .hero-visual {
+            position: relative;
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px; flex-shrink: 0;
         }
-        .mockup-item-content { flex: 1; min-width: 0; }
-        .mockup-item-title { font-size: 13px; font-weight: 600; color: white; }
-        .mockup-item-subtitle { font-size: 11px; color: var(--text-muted); }
-        .mockup-item-status {
-            font-size: 11px; padding: 4px 10px;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--primary); border-radius: 20px;
-            font-weight: 600; white-space: nowrap;
+        .hero-visual::before {
+            content: '';
+            position: absolute; inset: -8%;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.25) 0%, transparent 70%);
+            filter: blur(30px);
+            z-index: 0;
         }
-        .floating-card {
-            position: absolute;
-            background: rgba(10, 26, 20, 0.95);
-            backdrop-filter: blur(20px);
+        .hero-img {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 560px; display: block;
+            border-radius: 24px;
             border: 1px solid var(--border-strong);
-            border-radius: 16px; padding: 16px 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 60px var(--primary-glow);
             animation: float 6s ease-in-out infinite;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
-        .floating-card.card-1 { top: 10%; right: -20px; animation-delay: 0s; }
-        .floating-card.card-2 { bottom: 15%; left: -30px; animation-delay: 2s; }
-        .floating-card .fc-title { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; font-weight: 500; }
-        .floating-card .fc-value { font-size: 18px; font-weight: 800; color: white; }
-        .floating-card .fc-value.green { color: var(--primary); }
         
         /* SECTIONS */
         section { padding: 100px 0; position: relative; z-index: 1; }
@@ -249,7 +209,7 @@
         .section-label {
             display: inline-block;
             padding: 6px 16px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(0, 230, 118, 0.1);
             border: 1px solid var(--border-strong);
             border-radius: 50px;
             font-size: 12px; font-weight: 600;
@@ -263,7 +223,7 @@
             line-height: 1.1;
         }
         .section-title .highlight {
-            background: linear-gradient(135deg, #34d399, #10b981);
+            background: linear-gradient(135deg, #69f0ae, #00e676);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -295,7 +255,7 @@
         .feature-card:hover::before { opacity: 1; }
         .feature-icon {
             width: 60px; height: 60px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.2), rgba(0, 200, 83, 0.2));
             border: 1px solid var(--border-strong);
             border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
@@ -307,23 +267,23 @@
         .feature-card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
         .feature-tag {
             margin-top: 16px; padding: 8px 12px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(0, 230, 118, 0.1);
             border-radius: 8px;
             font-size: 12px; color: var(--primary-light);
             font-weight: 600; display: inline-block;
         }
         
         /* DIFERENCIAIS */
-        .diferenciais-section { background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.03) 50%, transparent 100%); }
+        .diferenciais-section { background: linear-gradient(180deg, transparent 0%, rgba(0, 230, 118, 0.03) 50%, transparent 100%); }
         .diferencial-card { border: 1px solid var(--border-strong); }
         .diferencial-card.featured {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(0, 200, 83, 0.08));
             border: 2px solid var(--primary);
         }
         .diferencial-badge {
             position: absolute; top: -12px; left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             color: white; padding: 6px 20px;
             border-radius: 50px;
             font-size: 11px; font-weight: 700;
@@ -335,7 +295,7 @@
         /* BANNER */
         .banner-destaque {
             margin-top: 80px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(0, 200, 83, 0.08));
             border: 2px solid var(--primary);
             border-radius: 24px; padding: 60px 48px;
             text-align: center;
@@ -345,7 +305,7 @@
             content: '';
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.15) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -355,7 +315,7 @@
         .banner-destaque p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
         .banner-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
         .banner-stat {
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(0, 230, 118, 0.15);
             padding: 20px 32px; border-radius: 12px;
             border: 1px solid var(--border-strong);
             min-width: 140px;
@@ -377,25 +337,25 @@
         .recurso-text { font-size: 14px; color: var(--text); font-weight: 500; }
         
         /* PRICING */
-        .pricing-section { background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.04) 50%, transparent 100%); }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .pricing-section { background: linear-gradient(180deg, transparent 0%, rgba(0, 230, 118, 0.04) 50%, transparent 100%); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
         .pricing-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px; padding: 40px 32px;
+            border-radius: 20px; padding: 40px 28px;
             position: relative; transition: all 0.4s;
         }
         .pricing-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .pricing-card.featured {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(0, 200, 83, 0.08));
             border: 2px solid var(--primary);
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
-        .pricing-card.featured:hover { transform: scale(1.05) translateY(-8px); }
+        .pricing-card.featured:hover { transform: scale(1.04) translateY(-8px); }
         .pricing-badge {
             position: absolute; top: -12px; left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             color: white; padding: 6px 20px;
             border-radius: 50px;
             font-size: 11px; font-weight: 700;
@@ -404,9 +364,9 @@
         }
         .pricing-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: white; }
         .pricing-card .price-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
-        .pricing-card .price { font-size: 52px; font-weight: 900; color: white; margin: 20px 0; line-height: 1; }
-        .pricing-card .price .currency { font-size: 24px; vertical-align: top; color: var(--primary-light); margin-right: 2px; }
-        .pricing-card .price .period { font-size: 16px; color: var(--text-muted); font-weight: 400; }
+        .pricing-card .price { font-size: 48px; font-weight: 900; color: white; margin: 20px 0; line-height: 1; }
+        .pricing-card .price .currency { font-size: 22px; vertical-align: top; color: var(--primary-light); margin-right: 2px; }
+        .pricing-card .price .period { font-size: 15px; color: var(--text-muted); font-weight: 400; }
         .pricing-card ul { list-style: none; margin: 32px 0; }
         .pricing-card ul li {
             padding: 12px 0; color: var(--text-muted);
@@ -423,7 +383,7 @@
             text-decoration: none; display: block; text-align: center;
         }
         .btn-pricing.primary {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #00e676, #00c853);
             color: white;
             box-shadow: 0 4px 20px var(--primary-glow);
         }
@@ -437,7 +397,7 @@
         /* CTA */
         .cta-section { padding: 80px 0; }
         .cta-box {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(0, 200, 83, 0.08));
             border: 1px solid var(--border-strong);
             border-radius: 24px; padding: 64px;
             text-align: center;
@@ -447,7 +407,7 @@
             content: '';
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         .cta-box > * { position: relative; z-index: 1; }
@@ -486,7 +446,7 @@
         .social-links { display: flex; gap: 12px; }
         .social-links a {
             width: 38px; height: 38px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(0, 230, 118, 0.1);
             border: 1px solid var(--border);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
@@ -542,9 +502,11 @@
         @media (max-width: 968px) {
             .nav-links, .nav-buttons { display: none; }
             .mobile-menu-btn { display: block; }
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero { padding: 140px 0 80px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+            .hero { padding: 130px 0 70px; }
             .hero h1 { font-size: 42px; }
+            .hero-visual { order: -1; }
+            .hero-img { max-width: 480px; margin: 0 auto; }
             .section-title { font-size: 36px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .pricing-card.featured { transform: none; }
@@ -558,6 +520,7 @@
             .hero h1 { font-size: 32px; letter-spacing: -1px; }
             .hero-buttons { flex-direction: column; }
             .btn-large { width: 100%; justify-content: center; }
+            .hero-features { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .section-title { font-size: 28px; }
@@ -584,7 +547,7 @@
                 </ul>
                 <div class="nav-buttons">
                     <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20testar%20o%20OS-PREMIUM%20grátis" class="btn-ghost" target="_blank">Entrar</a>
-                    <a href="https://github.com/inforcellitambi/os-premium-site/releases/download/v3.8.0/OS-PREMIUM-Setup-3.8.0.exe" class="btn-primary" target="_blank">️ Baixar Grátis</a>
+                    <a href="https://github.com/inforcellitambi/os-premium-instalador/releases/download/v3.8.1/OS-PREMIUM-Setup-3.8.1.exe" class="btn-primary" target="_blank">⬇️ Baixar Grátis</a>
                 </div>
                 <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             </nav>
@@ -599,7 +562,7 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- ✅ HERO COM A IMAGEM DO RAPAZ EM DESTAQUE -->
     <section class="hero">
         <div class="container">
             <div class="hero-grid">
@@ -614,7 +577,7 @@
                         Sistema completo para administrar sua loja, organizar suas Ordens de Serviço e contar com ferramentas técnicas profissionais para sua bancada.
                     </p>
                     <div class="hero-buttons">
-                        <a href="https://github.com/inforcellitambi/os-premium-site/releases/download/v3.8.0/OS-PREMIUM-Setup-3.8.0.exe" class="btn-large primary" target="_blank">
+                        <a href="https://github.com/inforcellitambi/os-premium-instalador/releases/download/v3.8.1/OS-PREMIUM-Setup-3.8.1.exe" class="btn-large primary" target="_blank">
                             ⬇️ BAIXAR GRÁTIS POR 7 DIAS
                         </a>
                         <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20OS-PREMIUM" class="btn-large secondary" target="_blank">
@@ -622,67 +585,15 @@
                         </a>
                     </div>
                     <div class="hero-features">
-                        <div class="hero-feature">7 dias grátis em qualquer plano</div>
-                        <div class="hero-feature">Ative em minutos</div>
-                        <div class="hero-feature">100% Offline</div>
+                        <div class="hero-feature">Organize suas ordens</div>
+                        <div class="hero-feature">Acompanhe em tempo real</div>
+                        <div class="hero-feature">Aumente sua produtividade</div>
+                        <div class="hero-feature">Cresça com gestão</div>
                     </div>
                 </div>
 
-                <div class="hero-mockup">
-                    <div class="mockup-main">
-                        <div class="mockup-header">
-                            <div class="mockup-dot red"></div>
-                            <div class="mockup-dot yellow"></div>
-                            <div class="mockup-dot green"></div>
-                            <div class="mockup-title">Dashboard - OS-PREMIUM</div>
-                        </div>
-                        <div class="mockup-stats">
-                            <div class="mockup-stat">
-                                <div class="label">ORDENS DE SERVIÇO</div>
-                                <div class="value purple">128</div>
-                            </div>
-                            <div class="mockup-stat">
-                                <div class="label">FATURAMENTO</div>
-                                <div class="value green">R$ 84.560</div>
-                            </div>
-                        </div>
-                        <div class="mockup-list">
-                            <div class="mockup-item">
-                                <div class="mockup-item-icon">📱</div>
-                                <div class="mockup-item-content">
-                                    <div class="mockup-item-title">iPhone 13 Pro</div>
-                                    <div class="mockup-item-subtitle">Cliente: Marina Costa</div>
-                                </div>
-                                <div class="mockup-item-status">Em reparo</div>
-                            </div>
-                            <div class="mockup-item">
-                                <div class="mockup-item-icon">💻</div>
-                                <div class="mockup-item-content">
-                                    <div class="mockup-item-title">Notebook Dell</div>
-                                    <div class="mockup-item-subtitle">Cliente: João Silva</div>
-                                </div>
-                                <div class="mockup-item-status">Pronto</div>
-                            </div>
-                            <div class="mockup-item">
-                                <div class="mockup-item-icon">🖥️</div>
-                                <div class="mockup-item-content">
-                                    <div class="mockup-item-title">Monitor Samsung</div>
-                                    <div class="mockup-item-subtitle">Cliente: Pedro Santos</div>
-                                </div>
-                                <div class="mockup-item-status">Entregue</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="floating-card card-1">
-                        <div class="fc-title">Faturamento Hoje</div>
-                        <div class="fc-value green">+R$ 2.450</div>
-                    </div>
-
-                    <div class="floating-card card-2">
-                        <div class="fc-title">OS Concluídas</div>
-                        <div class="fc-value">+15%</div>
-                    </div>
+                <div class="hero-visual">
+                    <img src="banner-os-premium.jpg" alt="OS-PREMIUM - Se você ainda não conhece, tá perdendo tempo! Vem conhecer!" class="hero-img">
                 </div>
             </div>
         </div>
@@ -749,7 +660,7 @@
                     <p>Cliente pode alterar usuário e senha do sistema com segurança e facilidade.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"></div>
+                    <div class="feature-icon">💾</div>
                     <h3>Backup e Restauração</h3>
                     <p>Faça backup completo dos dados e restaure quando necessário. Segurança total.</p>
                 </div>
@@ -811,7 +722,6 @@
                 </div>
             </div>
 
-            <!-- Banner Destacado -->
             <div class="banner-destaque">
                 <h3> O único sistema que une <span class="highlight">gestão + ferramentas técnicas</span></h3>
                 <p>Enquanto outros sistemas oferecem apenas gestão de OS, o OS-PREMIUM inclui ferramentas profissionais de diagnóstico, recuperação e reparo para sua bancada técnica.</p>
@@ -874,8 +784,8 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label">PLANOS</div>
-                <h2 class="section-title">Plano único com <span class="highlight">tudo incluso</span></h2>
-                <p class="section-subtitle">Acesse todas as funcionalidades por um preço justo</p>
+                <h2 class="section-title">Escolha o plano ideal para <span class="highlight">você</span></h2>
+                <p class="section-subtitle">Mensal, trimestral ou anual — tudo incluso em qualquer plano</p>
             </div>
 
             <div class="pricing-grid">
@@ -891,11 +801,10 @@
                         <li>1 usuário</li>
                         <li>Backup manual</li>
                     </ul>
-                    <a href="https://github.com/inforcellitambi/os-premium-site/releases/download/v3.8.0/OS-PREMIUM-Setup-3.8.0.exe" class="btn-pricing secondary" target="_blank">⬇️ Baixar Trial</a>
+                    <a href="https://github.com/inforcellitambi/os-premium-instalador/releases/download/v3.8.1/OS-PREMIUM-Setup-3.8.1.exe" class="btn-pricing secondary" target="_blank">⬇️ Baixar Trial</a>
                 </div>
 
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">MAIS POPULAR</div>
+                <div class="pricing-card">
                     <h3>Mensal</h3>
                     <p class="price-desc">Acesso completo mensal</p>
                     <div class="price">
@@ -909,14 +818,15 @@
                         <li>Atualizações gratuitas</li>
                         <li>Relatório MEI em PDF</li>
                     </ul>
-                    <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20assinar%20o%20plano%20Mensal%20do%20OS-PREMIUM" class="btn-pricing primary" target="_blank">💬 Assinar Agora</a>
+                    <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20assinar%20o%20plano%20MENSAL%20do%20OS-PREMIUM" class="btn-pricing secondary" target="_blank">💬 Assinar Mensal</a>
                 </div>
 
-                <div class="pricing-card">
-                    <h3>Anual</h3>
-                    <p class="price-desc">Economize R$ 10 no ano</p>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MAIS POPULAR</div>
+                    <h3>Trimestral</h3>
+                    <p class="price-desc">3 meses de acesso completo</p>
                     <div class="price">
-                        <span class="currency">R$</span>230<span class="period">/ano</span>
+                        <span class="currency">R$</span>60<span class="period">/trimestre</span>
                     </div>
                     <ul>
                         <li>Todas as funcionalidades</li>
@@ -926,7 +836,24 @@
                         <li>Atualizações gratuitas</li>
                         <li>Relatório MEI em PDF</li>
                     </ul>
-                    <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20assinar%20o%20plano%20Anual%20do%20OS-PREMIUM" class="btn-pricing secondary" target="_blank">💬 Assinar Anual</a>
+                    <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20assinar%20o%20plano%20TRIMESTRAL%20do%20OS-PREMIUM" class="btn-pricing primary" target="_blank">💬 Assinar Trimestral</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Anual</h3>
+                    <p class="price-desc">12 meses de acesso completo</p>
+                    <div class="price">
+                        <span class="currency">R$</span>240<span class="period">/ano</span>
+                    </div>
+                    <ul>
+                        <li>Todas as funcionalidades</li>
+                        <li>Suporte prioritário via WhatsApp</li>
+                        <li>Usuários ilimitados</li>
+                        <li>Backup automático</li>
+                        <li>Atualizações gratuitas</li>
+                        <li>Relatório MEI em PDF</li>
+                    </ul>
+                    <a href="https://wa.me/5521980633651?text=Olá!%20Quero%20assinar%20o%20plano%20ANUAL%20do%20OS-PREMIUM" class="btn-pricing secondary" target="_blank">💬 Assinar Anual</a>
                 </div>
             </div>
         </div>
@@ -938,7 +865,7 @@
             <div class="cta-box">
                 <h2>Pronto para transformar sua assistência?</h2>
                 <p>Baixe agora e comece grátis por 7 dias. Sem compromisso!</p>
-                <a href="https://github.com/inforcellitambi/os-premium-site/releases/download/v3.8.0/OS-PREMIUM-Setup-3.8.0.exe" class="btn-large primary" target="_blank">
+                <a href="https://github.com/inforcellitambi/os-premium-instalador/releases/download/v3.8.1/OS-PREMIUM-Setup-3.8.1.exe" class="btn-large primary" target="_blank">
                     ⬇️ BAIXAR GRÁTIS AGORA
                 </a>
             </div>
